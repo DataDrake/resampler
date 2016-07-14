@@ -10,15 +10,15 @@ import (
 )
 
 func Usage() {
-	fmt.Println("USAGE: resampler [OPTION]... MODE TYPE SAMPLES SRC DEST \n")
-	fmt.Println("Generate request statistics for an ApacheLog2DB import\n")
-	fmt.Println("\tMODE:\thow to combine the samples\n")
-	fmt.Println("\t\t AVG, MAX, MIN, SUM\n")
-	fmt.Println("\tTYPE:\ttype of data to resample\n")
-	fmt.Println("\t\tFLOAT, INT, BYTE\n")
-	fmt.Println("\tSAMPLES:\tnumber of rows to combine\n")
-	fmt.Println("\tSRC:\tpath to a CSV file to resample\n")
-	fmt.Println("\tDEST:\tpath to a CSV file for output\n")
+	fmt.Print("USAGE: resampler [OPTION]... MODE TYPE SAMPLES SRC DEST \n\n")
+	fmt.Print("Generate request statistics for an ApacheLog2DB import\n\n")
+	fmt.Print("\tMODE:\thow to combine the samples\n\n")
+	fmt.Print("\t\t AVG, MAX, MIN, SUM\n\n")
+	fmt.Print("\tTYPE:\ttype of data to resample\n\n")
+	fmt.Print("\t\tFLOAT, INT, BYTE\n\n")
+	fmt.Print("\tSAMPLES:\tnumber of rows to combine\n\n")
+	fmt.Print("\tSRC:\tpath to a CSV file to resample\n\n")
+	fmt.Print("\tDEST:\tpath to a CSV file for output\n\n")
 }
 
 func main() {
