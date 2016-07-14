@@ -15,7 +15,7 @@ func AVGFloat(samples [][]string, skiplabel bool) []string {
 	for j, _ := range floats[0] {
 		// for each row
 		for _, row := range floats {
-			total += row[j]
+			total[j] += row[j]
 			count[j]++
 		}
 		total[j] /= count[j]
@@ -31,7 +31,7 @@ func AVGInt(samples [][]string, skiplabel bool) []string {
 	for j, _ := range ints[0] {
 		// for each row
 		for _, row := range ints {
-			total += row[j]
+			total[j] += row[j]
 			count[j]++
 		}
 		total[j] /= count[j]
@@ -47,7 +47,7 @@ func AVGByte(samples [][]string, skiplabel bool) []string {
 	for j, _ := range bytes[0] {
 		// for each row
 		for _, row := range bytes {
-			total += row[j]
+			total[j] += row[j]
 			count[j]++
 		}
 		total[j] /= count[j]
@@ -64,7 +64,7 @@ func MAXFloat(samples [][]string, skiplabel bool) []string {
 		// for each row
 		for _, row := range floats {
 			if row[j] > max[j] {
-				max = row[j]
+				max[j] = row[j]
 			}
 		}
 	}
@@ -80,7 +80,7 @@ func MAXInt(samples [][]string, skiplabel bool) []string {
 		// for each row
 		for _, row := range ints {
 			if row[j] > max[j] {
-				max = row[j]
+				max[j] = row[j]
 			}
 		}
 	}
@@ -96,7 +96,7 @@ func MAXByte(samples [][]string, skiplabel bool) []string {
 		// for each row
 		for _, row := range bytes {
 			if row[j] > max[j] {
-				max = row[j]
+				max[j] = row[j]
 			}
 		}
 	}
@@ -112,7 +112,7 @@ func MINFloat(samples [][]string, skiplabel bool) []string {
 		// for each row
 		for _, row := range floats {
 			if row[j] < min[j] {
-				min = row[j]
+				min[j] = row[j]
 			}
 		}
 	}
@@ -128,7 +128,7 @@ func MINInt(samples [][]string, skiplabel bool) []string {
 		// for each row
 		for _, row := range ints {
 			if row[j] < min[j] {
-				min = row[j]
+				min[j] = row[j]
 			}
 		}
 	}
@@ -144,7 +144,7 @@ func MINByte(samples [][]string, skiplabel bool) []string {
 		// for each row
 		for _, row := range bytes {
 			if row[j] < min[j] {
-				min = row[j]
+				min[j] = row[j]
 			}
 		}
 	}
@@ -159,7 +159,7 @@ func SUMFloat(samples [][]string, skiplabel bool) []string {
 		sum[j] = 0
 		// for each row
 		for _, row := range floats {
-			sum += row[j]
+			sum[j] += row[j]
 		}
 	}
 	return ConvertFromFloat(sum, skiplabel, samples[0][0])
@@ -173,7 +173,7 @@ func SUMInt(samples [][]string, skiplabel bool) []string {
 		sum[j] = 0
 		// for each row
 		for _, row := range ints {
-			sum += row[j]
+			sum[j] += row[j]
 		}
 	}
 	return ConvertFromInt(sum, skiplabel, samples[0][0])
@@ -187,55 +187,55 @@ func SUMByte(samples [][]string, skiplabel bool) []string {
 		sum[j] = 0
 		// for each row
 		for _, row := range bytes {
-			sum += row[j]
+			sum[j] += row[j]
 		}
 	}
 	return ConvertFromByte(sum, skiplabel, samples[0][0])
 }
 
-func GetFloatMode(mode string) (*Mode, error) {
+func GetFloatMode(mode string) (Mode, error) {
 	// Check for valid mode and set mode function
 	switch mode {
 	case "AVG":
-		return &AVGFloat, nil
+		return AVGFloat, nil
 	case "MAX":
-		return &MAXFloat, nil
+		return MAXFloat, nil
 	case "MIN":
-		return &MINFloat, nil
+		return MINFloat, nil
 	case "SUM":
-		return &SUMFloat, nil
+		return SUMFloat, nil
 	default:
 		return nil, errors.New("Invalid MODE specified: " + mode + "\n")
 	}
 }
 
-func GetIntMode(mode string) (*Mode, error) {
+func GetIntMode(mode string) (Mode, error) {
 	// Check for valid mode and set mode function
 	switch mode {
 	case "AVG":
-		return &AVGInt, nil
+		return AVGInt, nil
 	case "MAX":
-		return &MAXInt, nil
+		return MAXInt, nil
 	case "MIN":
-		return &MINInt, nil
+		return MINInt, nil
 	case "SUM":
-		return &SUMInt, nil
+		return SUMInt, nil
 	default:
 		return nil, errors.New("Invalid MODE specified: " + mode + "\n")
 	}
 }
 
-func GetByteMode(mode string) (*Mode, error) {
+func GetByteMode(mode string) (Mode, error) {
 	// Check for valid mode and set mode function
 	switch mode {
 	case "AVG":
-		return &AVGByte, nil
+		return AVGByte, nil
 	case "MAX":
-		return &MAXByte, nil
+		return MAXByte, nil
 	case "MIN":
-		return &MINByte, nil
+		return MINByte, nil
 	case "SUM":
-		return &SUMByte, nil
+		return SUMByte, nil
 	default:
 		return nil, errors.New("Invalid MODE specified: " + mode + "\n")
 	}

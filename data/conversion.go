@@ -12,7 +12,8 @@ func ConvertToFloat(rows [][]string, skiplabel bool) [][]float64 {
 			if j == 1 && skiplabel {
 				row[j] = 0.0
 			} else {
-				row[j] = strconv.ParseFloat(v, 64)
+				f, _ := strconv.ParseFloat(v, 64)
+				row[j] = f
 			}
 		}
 		conv[i] = row
@@ -25,9 +26,9 @@ func ConvertFromFloat(row []float64, skiplabel bool, xlabel string) []string {
 	// for each row
 	for j, v := range row {
 		if j == 1 && skiplabel {
-			row[j] = xlabel
+			conv[j] = xlabel
 		} else {
-			row[j] = strconv.FormatFloat(v, "f", -1, 64)
+			conv[j] = strconv.FormatFloat(v, 'f', -1, 64)
 		}
 	}
 	return conv
@@ -43,7 +44,8 @@ func ConvertToInt(rows [][]string, skiplabel bool) [][]int {
 			if j == 1 && skiplabel {
 				row[j] = 0.0
 			} else {
-				row[j] = strconv.ParseInt(v, 10, 64)
+				s, _ := strconv.ParseInt(v, 10, 64)
+				row[j] = int(s)
 			}
 		}
 		conv[i] = row
@@ -56,9 +58,9 @@ func ConvertFromInt(row []int, skiplabel bool, xlabel string) []string {
 	// for each row
 	for j, v := range row {
 		if j == 1 && skiplabel {
-			row[j] = xlabel
+			conv[j] = xlabel
 		} else {
-			row[j] = strconv.FormatInt(v, 10)
+			conv[j] = strconv.FormatInt(int64(v), 10)
 		}
 	}
 	return conv
@@ -74,7 +76,8 @@ func ConvertToByte(rows [][]string, skiplabel bool) [][]uint8 {
 			if j == 1 && skiplabel {
 				row[j] = 0.0
 			} else {
-				row[j] = strconv.ParseInt(v, 10, 8)
+				t, _ := strconv.ParseInt(v, 10, 8)
+				row[j] = uint8(t)
 			}
 		}
 		conv[i] = row
@@ -87,9 +90,9 @@ func ConvertFromByte(row []uint8, skiplabel bool, xlabel string) []string {
 	// for each row
 	for j, v := range row {
 		if j == 1 && skiplabel {
-			row[j] = xlabel
+			conv[j] = xlabel
 		} else {
-			row[j] = strconv.FormatInt(v, 10)
+			conv[j] = strconv.FormatInt(int64(v), 10)
 		}
 	}
 	return conv

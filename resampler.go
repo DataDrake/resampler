@@ -71,16 +71,21 @@ func main() {
 	dest_csv := csv.NewWriter(dest_file)
 
 	// Check for valid data type and set type functions
-	var mode *data.Mode
+	var mode data.Mode
 	switch args[1] {
 	case "FLOAT":
-		mode = data.GetFloatMode(args[2])
+		mode, err = data.GetFloatMode(args[2])
 	case "BYTE":
-		mode = data.GetByteMode(args[2])
+		mode, err = data.GetByteMode(args[2])
 	case "INT":
-		mode = data.GetIntMode(args[2])
+		mode, err = data.GetIntMode(args[2])
 	default:
 		fmt.Fprintf(os.Stderr, "Invalid data TYPE specified: %s\n", args[1])
+		Usage()
+		os.Exit(1)
+	}
+	if err != nil {
+		fmt.Fprint(os.Stderr, err.Error())
 		Usage()
 		os.Exit(1)
 	}

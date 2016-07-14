@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func Resample(src *csv.Reader, dest *csv.Writer, mode *Mode, samples int, ylabels, xlabels bool) {
+func Resample(src *csv.Reader, dest *csv.Writer, mode Mode, samples int, ylabels, xlabels bool) {
 	var err error
 	// write header if specified
 	if ylabels {
