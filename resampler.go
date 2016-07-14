@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"encoding/csv"
 	"flag"
+	"fmt"
+	"github.com/DataDrake/resampler/data"
 	"os"
 	"strconv"
-	"encoding/csv"
-	"github.com/DataDrake/resampler/data"
 )
 
 func Usage() {
@@ -23,8 +23,8 @@ func Usage() {
 
 func main() {
 	flag.Usage = func() { Usage() }
-	ylabels := flag.Bool("ylabels",false,"Preserve first row as column labels")
-	xlabels := flag.Bool("xlabels",false,"Preserve first column as row labels, by taking first value in each sample set")
+	ylabels := flag.Bool("ylabels", false, "Preserve first row as column labels")
+	xlabels := flag.Bool("xlabels", false, "Preserve first column as row labels, by taking first value in each sample set")
 	flag.Parse()
 
 	args := flag.Args()
@@ -85,7 +85,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	data.Resample(src_csv,dest_csv,mode,samples,*ylabels,*xlabels)
+	data.Resample(src_csv, dest_csv, mode, samples, *ylabels, *xlabels)
 
 	dest_csv.Flush()
 

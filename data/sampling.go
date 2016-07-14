@@ -3,11 +3,11 @@ package data
 import (
 	"encoding/csv"
 	"fmt"
-	"os"
 	"io"
+	"os"
 )
 
-func Resample(src *csv.Reader, dest *csv.Writer, mode *Mode, samples int, ylabels, xlabels bool ) {
+func Resample(src *csv.Reader, dest *csv.Writer, mode *Mode, samples int, ylabels, xlabels bool) {
 	var err error
 	// write header if specified
 	if ylabels {
@@ -17,16 +17,16 @@ func Resample(src *csv.Reader, dest *csv.Writer, mode *Mode, samples int, ylabel
 		}
 		err = dest.Write(header)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Failed to write header to DEST, reason: %s\n",err.Error())
+			fmt.Fprintf(os.Stderr, "Failed to write header to DEST, reason: %s\n", err.Error())
 		}
 	}
 	row, err := src.Read()
-	count := 1;
-	ss := make([][]string,0)
+	count := 1
+	ss := make([][]string, 0)
 	for err == nil {
-		if count % samples == 0 {
-			err = dest.Write(mode(ss,xlabels))
-			ss = make([][]string,0)
+		if count%samples == 0 {
+			err = dest.Write(mode(ss, xlabels))
+			ss = make([][]string, 0)
 		}
 		ss = append(ss, row)
 		row, err = src.Read()
