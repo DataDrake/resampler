@@ -72,15 +72,15 @@ func main() {
 
 	// Check for valid data type and set type functions
 	var mode data.Mode
-	switch args[1] {
+	switch args[0] {
 	case "FLOAT":
-		mode, err = data.GetFloatMode(args[2])
+		mode, err = data.GetFloatMode(args[1])
 	case "BYTE":
-		mode, err = data.GetByteMode(args[2])
+		mode, err = data.GetByteMode(args[1])
 	case "INT":
-		mode, err = data.GetIntMode(args[2])
+		mode, err = data.GetIntMode(args[1])
 	default:
-		fmt.Fprintf(os.Stderr, "Invalid data TYPE specified: %s\n", args[1])
+		fmt.Fprintf(os.Stderr, "Invalid data TYPE specified: %s\n", args[0])
 		Usage()
 		os.Exit(1)
 	}
