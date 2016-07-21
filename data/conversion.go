@@ -9,7 +9,7 @@ func ConvertToFloat(rows [][]string, skiplabel bool) [][]float64 {
 		row := make([]float64, len(rows[i]))
 		// for each col
 		for j, v := range r {
-			if j == 1 && skiplabel {
+			if j == 0 && skiplabel {
 				row[j] = 0.0
 			} else {
 				f, _ := strconv.ParseFloat(v, 64)
@@ -25,7 +25,7 @@ func ConvertFromFloat(row []float64, skiplabel bool, xlabel string) []string {
 	conv := make([]string, len(row))
 	// for each row
 	for j, v := range row {
-		if j == 1 && skiplabel {
+		if j == 0 && skiplabel {
 			conv[j] = xlabel
 		} else {
 			conv[j] = strconv.FormatFloat(v, 'f', -1, 64)
@@ -41,7 +41,7 @@ func ConvertToInt(rows [][]string, skiplabel bool) [][]int {
 		row := make([]int, len(rows[i]))
 		// for each col
 		for j, v := range r {
-			if j == 1 && skiplabel {
+			if j == 0 && skiplabel {
 				row[j] = 0.0
 			} else {
 				s, _ := strconv.ParseInt(v, 10, 64)
@@ -57,7 +57,7 @@ func ConvertFromInt(row []int, skiplabel bool, xlabel string) []string {
 	conv := make([]string, len(row))
 	// for each row
 	for j, v := range row {
-		if j == 1 && skiplabel {
+		if j == 0 && skiplabel {
 			conv[j] = xlabel
 		} else {
 			conv[j] = strconv.FormatInt(int64(v), 10)
@@ -73,7 +73,7 @@ func ConvertToByte(rows [][]string, skiplabel bool) [][]uint8 {
 		row := make([]uint8, len(rows[i]))
 		// for each col
 		for j, v := range r {
-			if j == 1 && skiplabel {
+			if j == 0 && skiplabel {
 				row[j] = 0.0
 			} else {
 				t, _ := strconv.ParseInt(v, 10, 8)
@@ -89,7 +89,7 @@ func ConvertFromByte(row []uint8, skiplabel bool, xlabel string) []string {
 	conv := make([]string, len(row))
 	// for each row
 	for j, v := range row {
-		if j == 1 && skiplabel {
+		if j == 0 && skiplabel {
 			conv[j] = xlabel
 		} else {
 			conv[j] = strconv.FormatInt(int64(v), 10)
