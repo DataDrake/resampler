@@ -23,6 +23,24 @@ func AVGFloat(samples [][]string, skiplabel bool) []string {
 	return ConvertFromFloat(total, skiplabel, samples[0][0])
 }
 
+func SafeAVGFloat(samples [][]string, skiplabel bool) []string {
+	total := make([]float64, len(samples[0]))
+	count := make([]float64, len(samples[0]))
+	floats := ConvertToFloat(samples, skiplabel)
+	// for each column
+	for j, _ := range floats[0] {
+		// for each row
+		for _, row := range floats {
+			if row[j] != 0.0 {
+				total[j] += row[j]
+				count[j]++
+			}
+		}
+		total[j] /= count[j]
+	}
+	return ConvertFromFloat(total, skiplabel, samples[0][0])
+}
+
 func AVGInt(samples [][]string, skiplabel bool) []string {
 	total := make([]int, len(samples[0]))
 	count := make([]int, len(samples[0]))
@@ -198,6 +216,8 @@ func GetFloatMode(mode string) (Mode, error) {
 	switch mode {
 	case "AVG":
 		return AVGFloat, nil
+	case "SAFEAVG":
+		return SafeAVGFloat, nil
 	case "MAX":
 		return MAXFloat, nil
 	case "MIN":
